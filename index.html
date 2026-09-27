@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Ninja vs Spider Hero — Rooftop Clash 3D</title>
+<meta name="description" content="3D arena fighter: Shadow Ninja vs Spider Hero on a neon rooftop. Desktop keyboard + mouse." />
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<div id="app">
+  <canvas id="scene"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" aria-hidden="false">
+    <div id="topbar">
+      <div class="fighter-card ninja-card">
+        <div class="fighter-name"><span class="dot dot-ninja"></span>SHADOW NINJA <span class="you">YOU</span></div>
+        <div class="hp-shell"><div id="hp-ninja" class="hp hp-ninja"></div><div id="hp-ninja-ghost" class="hp-ghost"></div></div>
+        <div class="subbar"><div id="stamina" class="stamina"></div></div>
+        <div id="pips-ninja" class="pips"><span></span><span></span></div>
+      </div>
+      <div id="timer-wrap">
+        <div id="timer">60</div>
+        <div id="round-label">ROUND 1</div>
+      </div>
+      <div class="fighter-card spider-card">
+        <div class="fighter-name"><span class="dot dot-spider"></span>SPIDER HERO <span class="cpu">CPU</span></div>
+        <div class="hp-shell"><div id="hp-spider" class="hp hp-spider"></div><div id="hp-spider-ghost" class="hp-ghost"></div></div>
+        <div class="subbar"><div id="enemy-intent" class="intent"></div></div>
+        <div id="pips-spider" class="pips"><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div id="announce" class="hidden"><div id="announce-big">FIGHT!</div><div id="announce-sub"></div></div>
+    <div id="combo" class="hidden"><span id="combo-count">0</span> HITS</div>
+    <div id="vignette"></div>
+    <div id="webbed" class="hidden">WEBBED!</div>
+    <div id="dmg-layer"></div>
+
+    <div id="hint">
+      <span><b>WASD</b> move</span><span><b>Mouse drag</b> camera</span><span><b>J / Click</b> slash</span><span><b>K / F</b> shuriken</span><span><b>L / E</b> kick</span><span><b>Space</b> jump</span><span><b>Shift</b> block</span><span><b>Q</b> dash</span>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+  </div>
+
+  <!-- Title / help overlay (translucent so 3D shows through for screenshots) -->
+  <div id="menu">
+    <div class="menu-inner">
+      <div class="kicker">NEON ROOFTOP ARENA • 3D FIGHTER • DESKTOP</div>
+      <h1><span class="t-ninja">NINJA</span> <span class="vs">VS</span> <span class="t-spider">SPIDER HERO</span></h1>
+      <p class="tag">Shadow katana meets web-slinger. Best of 3 rounds, 60 seconds each.</p>
+      <button id="btn-start" aria-label="Start game">⚔ START FIGHT</button>
+      <div class="controls-grid">
+        <div><b>W A S D</b><span>move</span></div>
+        <div><b>J / LMB</b><span>katana slash</span></div>
+        <div><b>K / F / RMB</b><span>shuriken</span></div>
+        <div><b>L / E</b><span>spinning kick</span></div>
+        <div><b>SPACE</b><span>jump</span></div>
+        <div><b>SHIFT hold</b><span>block</span></div>
+        <div><b>Q</b><span>dash</span></div>
+        <div><b>DRAG / WHEEL</b><span>camera / zoom</span></div>
+      </div>
+      <p class="fine">Tip: block before the web hits. Dash through webs. Shuriken to punish jumps.</p>
+    </div>
+  </div>
+
+  <div id="gameover" class="hidden">
+    <div class="menu-inner">
+      <div class="kicker" id="go-kicker">FULL TIME</div>
+      <h2 id="go-title">NINJA WINS</h2>
+      <p id="go-sub" class="tag"></p>
+      <button id="btn-rematch" aria-label="Rematch">↻ REMATCH (R)</button>
+    </div>
+  </div>
+
+  <!-- Touch controls -->
+  <div id="touch" class="hidden">
+    <div id="stick"><div id="stick-knob"></div></div>
+    <div id="touch-btns">
+      <button data-act="jump" aria-label="Jump">▲</button>
+      <button data-act="slash" aria-label="Slash">⚔</button>
+      <button data-act="shuriken" aria-label="Shuriken">✦</button>
+      <button data-act="kick" aria-label="Kick">🦵</button>
+      <button data-act="block" aria-label="Block">🛡</button>
+      <button data-act="dash" aria-label="Dash">≫</button>
+    </div>
+  </div>
+
+  <div id="loading"><div class="spin"></div><div>LOADING ARENA…</div></div>
+</div>
+<script type="module" src="./game.js"></script>
+</body>
+</html>
